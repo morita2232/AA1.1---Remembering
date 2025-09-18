@@ -35,6 +35,8 @@ public class MovTorreta : MonoBehaviour
 
             torsoTorreta.transform.localEulerAngles += new Vector3 (Mouse.current.delta.value.y, 0);
 
+            
+
 
         }
     }
