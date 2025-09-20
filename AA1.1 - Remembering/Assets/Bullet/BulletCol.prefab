@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7843591264879715673}
   m_Layer: 0
   m_Name: BulletCol
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rB: {fileID: 3362541805399679195}
-  cube: {fileID: 0}
+  forceAmount: 20
 --- !u!1 &4977654559622064106
 GameObject:
   m_ObjectHideFlags: 0
