@@ -3,41 +3,60 @@ using UnityEngine.InputSystem;
 
 public class MovTorreta : MonoBehaviour
 {
-
     public GameObject baseTorreta;
     public GameObject torsoTorreta;
 
     public bool baseT;
     public bool torsoT;
 
+    public float minBaseY = -60f;  
+    public float maxBaseY = 60f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float minTorsoX = -20f; 
+    public float maxTorsoX = 45f;
+
+    private float baseRotationY = 0f;
+    private float torsoRotationX = 0f;
+
+    
+    private Transform baseTransform;
+    private Transform torsoTransform;
+
     void Start()
     {
-        
+        baseTransform = baseTorreta != null ? baseTorreta.transform : null;
+        torsoTransform = torsoTorreta != null ? torsoTorreta.transform : null;
+
+        if (baseTransform != null)
+            baseRotationY = baseTransform.localEulerAngles.y;
+
+        if (torsoTransform != null)
+            torsoRotationX = torsoTransform.localEulerAngles.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (baseT == true)
+        Vector2 mouseDelta = Mouse.current.delta.value;
+
+        if (baseT && baseTransform != null)
         {
+            baseRotationY += mouseDelta.x;
+            baseRotationY = Mathf.Clamp(baseRotationY, minBaseY, maxBaseY);
 
-
-            baseTorreta.transform.localEulerAngles += new Vector3 (0, Mouse.current.delta.value.x);
-
-
+            Vector3 euler = baseTransform.localEulerAngles;
+            euler.y = baseRotationY;
+            baseTransform.localEulerAngles = euler;
         }
-        
-        if (torsoT == true)
+
+        if (torsoT && torsoTransform != null)
         {
+            torsoRotationX += mouseDelta.y;
+            torsoRotationX = Mathf.Clamp(torsoRotationX, minTorsoX, maxTorsoX);
 
-
-            torsoTorreta.transform.localEulerAngles += new Vector3 (Mouse.current.delta.value.y, 0);
-
-            
-
-
+            Vector3 euler = torsoTransform.localEulerAngles;
+            euler.x = torsoRotationX;
+            torsoTransform.localEulerAngles = euler;
         }
     }
 }
+
