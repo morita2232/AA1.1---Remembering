@@ -13,7 +13,8 @@ public class Bullet : MonoBehaviour
         }
 
         
-        rB.AddForce(transform.forward * forceAmount, ForceMode.Impulse);
+        rB.AddForce(transform.up * forceAmount, ForceMode.Impulse);
+        Destroy(gameObject, 5f);
     }
 }
 
