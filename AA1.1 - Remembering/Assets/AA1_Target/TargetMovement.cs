@@ -3,17 +3,18 @@ using UnityEngine;
 public class TargetMovement : MonoBehaviour
 {
     [Header("Path Settings")]
-    public Transform[] waypoints;      // Points to move between
-    public float speed = 3f;           // Movement speed
-    public bool loop = true;           // Restart when reaching the end
+    public Transform[] waypoints;      //puntos por donde se mueve
+    public float speed = 3f;           //velocidad de movimiento
+    public bool loop = true;           //Verificar si vuelve a hacer el recorrido
 
-    private int currentIndex = 0;
+    private int currentIndex = 0; //indice del waypoint actual
 
     void Update()
     {
+        //Si no hay wayopoints, no hacer nada
         if (waypoints.Length == 0) return;
 
-        // Move towards current waypoint
+        //Ir al siguiente waypoint
         Transform targetPoint = waypoints[currentIndex];
         transform.position = Vector3.MoveTowards(
             transform.position,
@@ -21,7 +22,7 @@ public class TargetMovement : MonoBehaviour
             speed * Time.deltaTime
         );
 
-        // If reached, move to next waypoint
+        //Si llego al waypoint, actualizar al siguiente
         if (Vector3.Distance(transform.position, targetPoint.position) < 0.05f)
         {
             currentIndex++;
@@ -29,11 +30,11 @@ public class TargetMovement : MonoBehaviour
             {
                 if (loop)
                 {
-                    currentIndex = 0; // restart
+                    currentIndex = 0; //restart
                 }
                 else
                 {
-                    enabled = false; // stop moving
+                    enabled = false; //dejar de moverse
                 }
             }
         }
